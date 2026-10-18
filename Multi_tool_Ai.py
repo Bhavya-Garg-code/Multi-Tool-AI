@@ -149,6 +149,34 @@ if options == 'General AI':
           if(st.button('Clear history')):
                 st.session_state.ai_history = []
                 st.rerun()
+elif(options == 'Math Mastermind'):
+     
+     st.header("Math Mastermind")
+     st.write("Enter your problem to get solutions")
+     problem = st.text_area("Enter your problem", placeholder = 'x+y = 35')
+     levels = st.selectbox('Difficulty level',['Basic','Moderate','Advanced'])
+
+     if(st.button('Solve')):
+          if not problem.strip():
+               st.error("No problem found")
+
+          else:
+               with st.spinner("Solving..."):
+                 answer = math_solver(problem,levels)
+               st.session_state.math_history.insert(0,{'problem':problem,'Answer':answer})
+               st.markdown(answer)
+
+     if (st.session_state.math_history):
+          for i,a in enumerate(st.session_state.math_history,1):
+               with st.container(border=True):
+                    st.write(f"Problem{i}")
+                    st.markdown(a['problem'])
+                    st.write(f"Answer{i}")
+                    st.markdown(a['Answer'])
+
+          if st.button('Clear history'):
+               st.session_state.math_history = []
+               st.rerun()
 
 st.sidebar.divider()
 st.sidebar.caption("AI mastermind hub  [Math solver, General AI]")
