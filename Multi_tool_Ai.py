@@ -3,7 +3,7 @@ import time
 import streamlit as  st
 
 try:
-    api = st.secrets('API')
+    api = st.secrets['API']
 except Exception as e:
     st.error("No API Key Found")
 
